@@ -7,6 +7,11 @@
 #include<condition_variable>
 
 using namespace std;
+struct C
+{
+	Counter<C> count_; //引入私有成员变量
+};
+
 class A
 {
 
@@ -58,12 +63,10 @@ B::~B()
 {
 }
 
-struct C
-{
-	Counter<C> count_; //引入私有成员变量
-};
 
-int main() {
+
+int main() 
+{
 
 	auto pa = new A;//这里泄漏1次
 	auto aa = new A[5];//这里泄漏5个
@@ -79,8 +82,13 @@ int main() {
 	}
 	auto pc = new C;
 	delete pc;	 
-	system("pause");
+	while (true)
+	{
+		this_thread::sleep_for(1s);
+	}
 	return 0;
 }
+ 
+
 
  

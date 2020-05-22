@@ -4,31 +4,21 @@
 #include <iostream>
 #include <atomic>
 #include <string>
-
-
 #include<thread>
 #include<mutex>
 #include<condition_variable>
 using namespace std;
-
-/*
-author: toy_lee5566(weixin)
-*/
-
 class CountData{
 public:
 	CountData(const char* name)
-		:m_name(name)
-	{
+		:m_name(name){
 	};
 
-	CountData(const CountData &co) 
-	{ 
+	CountData(const CountData &co) { 
 		m_name = co.m_name;
 	}
 	
-	~CountData()
-	{
+	~CountData(){
 		lock_guard<mutex> lock(mu);
 		std::cout << m_name<<" leak num =" << counter_ << std::endl;
 	};
@@ -55,7 +45,7 @@ public:
 		data_.inc();
 	}
 	~Counter() {
-		data_.inc();
+		data_.dec();
 	}
 	Counter(const Counter&){  ; data_.inc(); }
 private:
