@@ -50,8 +50,6 @@ public:
 	Counter(const Counter&){  ; data_.inc(); }
 private:
 	static CountData data_;
-	
-
 };
 //TIPS:模板类的静态成员可以定义在头文件中，被链接程序特殊处理
 template<typename T>
